@@ -58,6 +58,6 @@ LABEL org.label-schema.schema-version="1.0" \
   license="Elastic License"
 {% endif -%}
 
-VOLUME ["{{ beat_home }}/data", "{{ beat_home }}/logs"]
+VOLUME ["{{ beat_home }}/data", "{{ beat_home }}/logs", "/mnt/log/"]
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
 CMD ["-e"]
