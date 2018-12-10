@@ -26,13 +26,13 @@ RUN groupadd --gid 1000 {{ beat }} && \
 WORKDIR {{ beat_home }}
 RUN mkdir data logs && \
     chown -R root:{{ beat }} . && \
-    find {{ beat_home }} -type d -exec chmod 0750 {} \; && \
-    find {{ beat_home }} -type f -exec chmod 0640 {} \; && \
-    chmod 0750 {{ binary_file }} && \
+    find {{ beat_home }} -type d -exec chmod 0755 {} \; && \
+    find {{ beat_home }} -type f -exec chmod 0644 {} \; && \
+    chmod 0755 {{ binary_file }} && \
     {%- if beat == 'filebeat' or beat == 'metricbeat' -%}
-    chmod 0770 modules.d && \
+    chmod 0775 modules.d && \
     {% endif -%}
-    chmod 0770 data logs
+    chmod 0777 data logs
 
 {%- if beat == 'packetbeat' %}
 RUN setcap cap_net_raw,cap_net_admin=eip {{ binary_file }}
